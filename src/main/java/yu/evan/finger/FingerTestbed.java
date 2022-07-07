@@ -12,32 +12,32 @@ import us.ihmc.simulationconstructionset.SimulationConstructionSet;
  */
 public class FingerTestbed
 {
-   private ArduinoCommunication arduinoCommunication;
-   public FingerTestbed()
-   {
-      arduinoCommunication = new ArduinoCommunication();
-      Finger finger = new Finger();
-      FingerController fingerController = new FingerController();
-      fingerController.initialize();
-      finger.setController(fingerController);
-
-
-      // Creating the simulation.
-      SimulationConstructionSet scs = new SimulationConstructionSet(finger);
-      // As this example simulation is rather simple, let's prevent SCS from
-      // simulating faster than real-time.
-      scs.setSimulateNoFasterThanRealTime(true);
-      // Defining the simulation DT and the frequency at which data is logged.
-      scs.setDT(1.0e-4, 10);
-      // Defining the buffer size to ensure a minimum simulation duration before
-      // filling the graphs in the simulator.
-      scs.changeBufferSize(65536);
-      // Launch the simulator.
-      scs.startOnAThread();
-   }
-
-   public static void main(String[] args)
-   {
-      new FingerTestbed();
-   }
+//   private ArduinoCommunication arduinoCommunication;
+//   public FingerTestbed()
+//   {
+//      arduinoCommunication = new ArduinoCommunication();
+//      FingerRobot fingerRobot = new FingerRobot();
+//      FingerController fingerController = new FingerController();
+//      fingerController.initialize();
+//      fingerRobot.setController(fingerController);
+//
+//
+//      // Creating the simulation.
+//      SimulationConstructionSet scs = new SimulationConstructionSet(fingerRobot);
+//      // As this example simulation is rather simple, let's prevent SCS from
+//      // simulating faster than real-time.
+//      scs.setSimulateNoFasterThanRealTime(true);
+//      // Defining the simulation DT and the frequency at which data is logged.
+//      scs.setDT(1.0e-4, 10);
+//      // Defining the buffer size to ensure a minimum simulation duration before
+//      // filling the graphs in the simulator.
+//      scs.changeBufferSize(65536);
+//      // Launch the simulator.
+//      scs.startOnAThread();
+//   }
+//
+//   public static void main(String[] args)
+//   {
+//      new FingerTestbed();
+//   }
 }
