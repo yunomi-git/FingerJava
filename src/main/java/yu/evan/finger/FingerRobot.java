@@ -1,7 +1,6 @@
 package yu.evan.finger;
 
 import us.ihmc.euclid.Axis3D;
-import us.ihmc.euclid.orientation.interfaces.Orientation3DReadOnly;
 import us.ihmc.euclid.tuple3D.Vector3D;
 import us.ihmc.euclid.yawPitchRoll.YawPitchRoll;
 import us.ihmc.graphicsDescription.Graphics3DObject;
@@ -10,19 +9,26 @@ import us.ihmc.simulationconstructionset.Link;
 import us.ihmc.simulationconstructionset.PinJoint;
 import us.ihmc.simulationconstructionset.RigidJoint;
 import us.ihmc.simulationconstructionset.Robot;
+import yu.evan.finger.kinematics.FingerForwardKinematics;
 
 public class FingerRobot extends Robot
 {
-   private final double distalLength = 0.022; //mm
-   private final double intermediateLength = 0.025; //mm
-   private final double proximalLength = 0.043; //mm
+   private final double distalLength; //mm
+   private final double intermediateLength; //mm
+   private final double proximalLength; //mm
    private final double DEFAULT_MASS = 1.0;
 
-   private FingerForwardKinematics forwardKinematics;
+   private final PinJoint proximalJoint;
+   private final PinJoint intermediateJoint;
+   private final PinJoint distalJoint;
 
-   public FingerRobot()
+
+   public FingerRobot(FingerParameters parameters)
    {
       super("Finger");
+      distalLength = parameters.getDistalLength();
+      intermediateLength = parameters.getIntermediateLength();
+      proximalLength = parameters.getProximalLength();
 
       RigidJoint rootJoint = new RigidJoint("CeilingJoint", new Vector3D(), this);
 
@@ -33,9 +39,9 @@ public class FingerRobot extends Robot
       ceiling.setLinkGraphics(linkGraphics);
       rootJoint.setLink(ceiling);
 
-      PinJoint proximalJoint = new PinJoint("jointProximal", new Vector3D(0.0, 0.0, 0.0), this, Axis3D.Y);
-      PinJoint intermediateJoint = new PinJoint("jointIntermediate", new Vector3D(proximalLength, 0.0, 0.0), this, Axis3D.Y);
-      PinJoint distalJoint = new PinJoint("jointDistal", new Vector3D(intermediateLength, 0.0, 0.0), this, Axis3D.Y);
+      proximalJoint = new PinJoint("jointProximal", new Vector3D(0.0, 0.0, 0.0), this, Axis3D.Y);
+      intermediateJoint = new PinJoint("jointIntermediate", new Vector3D(proximalLength, 0.0, 0.0), this, Axis3D.Y);
+      distalJoint = new PinJoint("jointDistal", new Vector3D(intermediateLength, 0.0, 0.0), this, Axis3D.Y);
 
       proximalJoint.setLink(createLink("proximalLink", proximalLength));
       rootJoint.addJoint(proximalJoint);
@@ -49,8 +55,24 @@ public class FingerRobot extends Robot
       distalJoint.setInitialState(0, 0.0);
 
       this.addRootJoint(rootJoint);
+   }
 
+   public void setProximalAngle(double angle)
+   {
+      proximalJoint.setQ(angle);
+      proximalJoint.setQd(0);
+   }
 
+   public void setIntermediateAngle(double angle)
+   {
+      intermediateJoint.setQ(angle);
+      intermediateJoint.setQd(0);
+   }
+
+   public void setDistalAngle(double angle)
+   {
+      distalJoint.setQ(angle);
+      distalJoint.setQd(0);
    }
 
    private Link createLink(String name, double length)

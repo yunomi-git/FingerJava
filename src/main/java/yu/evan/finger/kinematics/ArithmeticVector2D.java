@@ -1,4 +1,4 @@
-package yu.evan.finger;
+package yu.evan.finger.kinematics;
 
 public class ArithmeticVector2D implements Arithmetic<ArithmeticVector2D>
 {

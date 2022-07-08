@@ -1,4 +1,4 @@
-package yu.evan.finger;
+package yu.evan.finger.kinematics;
 
 public interface Arithmetic<T>
 {

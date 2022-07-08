@@ -61,9 +61,10 @@ class OnshapeReaderMatrix:
         vectorData = self.data[x, y, :] # swapped y, x. how?
         return vectorData.reshape(2,2)
 
-fileName = "FingerKinematicsOnshape.csv"
-path = "./"
-reader = OnshapeReaderVector2D(fileName, path)
-matrixReader = OnshapeReaderMatrix("FingerJacobianOnshape.csv", path)
-print(reader.getDataAt(45, 0))
-print(matrixReader.getDataAt(0,1))
+if __name__ == "__main__":
+    fileName = "FingerKinematicsOnshape.csv"
+    path = "./"
+    reader = OnshapeReaderVector2D(fileName, path)
+    matrixReader = OnshapeReaderMatrix("FingerJacobianOnshape.csv", path)
+    print(reader.getDataAt(0, 1))
+    print(matrixReader.getDataAt(0,1))

@@ -16,4 +16,8 @@ public class ArduinoCommunication
    {
 
    }
+
+   public static class FingerParameters
+   {
+   }
 }
