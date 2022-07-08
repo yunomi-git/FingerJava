@@ -1,7 +1,8 @@
 package yu.evan.finger;
 
 import us.ihmc.euclid.tuple2D.Vector2D;
-
+//        int[][] values = {{1,2},{3,4}};
+//        System.out.println(values[0][1]); -> 2
 public class FingerForwardKinematics
 {
    private double proximalAngle;
