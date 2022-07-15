@@ -1,6 +1,6 @@
 package yu.evan.finger;
 
-public class FingerParameters
+public class FingerParameters // eventually need to redo this
 {
    private final double distalLength = 0.022; //mm
    private final double intermediateLength = 0.025; //mm

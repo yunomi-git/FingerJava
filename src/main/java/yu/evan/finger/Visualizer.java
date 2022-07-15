@@ -18,6 +18,7 @@ public class Visualizer
 
       FingerRobot fingerRobot = new FingerRobot(parameters);
       FingerController controller = new FingerController(fingerRobot, parameters);
+      controller.setUseSerial(true);
       fingerRobot.setController(controller);
 
       sim = new SimulationConstructionSet(fingerRobot);
